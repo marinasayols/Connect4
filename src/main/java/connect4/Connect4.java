@@ -1,0 +1,30 @@
+package connect4;
+
+public class Connect4 {
+
+    private Board board;
+    private Turn turn;
+
+    Connect4() {
+        this.board = new Board();
+        this.turn = new Turn(this.board);
+    }
+
+    private void play() {
+        Message.TITLE.write();
+        this.board.write();
+        do {
+            this.turn.play();
+            this.board.write();
+        } while (!this.isConnect4());
+        this.turn.writeWinner();
+    }
+
+    private boolean isConnect4() {
+        return this.board.isTicTacToe(this.turn.getActiveColor());
+    }
+
+    public static void main(String[] args) {
+        new Connect4().play();
+    }
+}
