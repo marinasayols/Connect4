@@ -16,12 +16,8 @@ public class Connect4 {
         do {
             this.turn.play();
             this.board.write();
-        } while (!this.isFinished());
+        } while (!this.board.isFinished());
         this.turn.writeWinner();
-    }
-
-    private boolean isFinished() {
-        return this.board.isFinished();
     }
 
     public static void main(String[] args) {
