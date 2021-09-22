@@ -16,12 +16,12 @@ public class Connect4 {
         do {
             this.turn.play();
             this.board.write();
-        } while (!this.isConnect4());
+        } while (!this.isFinished());
         this.turn.writeWinner();
     }
 
-    private boolean isConnect4() {
-        return this.board.isConnect4(this.turn.getActiveColor());
+    private boolean isFinished() {
+        return this.board.isFinished();
     }
 
     public static void main(String[] args) {
