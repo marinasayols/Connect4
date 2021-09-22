@@ -60,7 +60,7 @@ public class Board {
         for (int i = 0; i < Board.ROWS; i++) {
             for (int j = 0; j < Board.COLUMNS; j++) {
                 Coordinate coordinate = new Coordinate(i, j);
-                for(Direction direction: Direction.values()){
+                for (Direction direction : Direction.values()) {
                     if (this.hasFourConsecutive(coordinate.getCellsInDirection(direction))) {
                         return true;
                     }
@@ -73,7 +73,7 @@ public class Board {
     boolean hasFourConsecutive(ArrayList<Color> cellsDirection) {
         Color color = cellsDirection.get(0);
         for (int i = 1; i < cellsDirection.size(); i++) {
-            if (color != cellsDirection.get(i)){
+            if (color != cellsDirection.get(i)) {
                 return false;
             }
         }
