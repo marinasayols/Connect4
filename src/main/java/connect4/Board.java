@@ -70,10 +70,10 @@ public class Board {
         return false;
     }
 
-    boolean hasFourConsecutive(ArrayList<Color> cellsDirection) {
-        Color color = cellsDirection.get(0);
+    boolean hasFourConsecutive(ArrayList<Coordinate> cellsDirection) {
+        Color color = this.cells[cellsDirection.get(0).getRow()][cellsDirection.get(0).getColumn()];
         for (int i = 1; i < cellsDirection.size(); i++) {
-            if (color != cellsDirection.get(i)) {
+            if (color != this.cells[cellsDirection.get(i).getRow()][cellsDirection.get(i).getColumn()]) {
                 return false;
             }
         }
