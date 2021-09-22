@@ -6,6 +6,7 @@ public class Board {
 
     public static final int COLUMNS = 7;
     public static final int ROWS = 6;
+    public static final int COLOR_GOAL = 4;
     Color[][] cells;
 
     Board() {
@@ -72,12 +73,13 @@ public class Board {
 
     boolean hasFourConsecutive(ArrayList<Coordinate> cellsDirection) {
         Color color = this.cells[cellsDirection.get(0).getRow()][cellsDirection.get(0).getColumn()];
+        int counter = 0;
         for (int i = 1; i < cellsDirection.size(); i++) {
-            if (color != this.cells[cellsDirection.get(i).getRow()][cellsDirection.get(i).getColumn()]) {
-                return false;
+            if (color == this.cells[cellsDirection.get(i).getRow()][cellsDirection.get(i).getColumn()]) {
+                counter++;
             }
         }
-        return true;
+        return counter == Board.COLOR_GOAL;
     }
 
     void write() {
