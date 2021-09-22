@@ -1,5 +1,7 @@
 package connect4;
 
+import java.util.ArrayList;
+
 public class Board {
 
     public static final int COLUMNS = 7;
@@ -14,31 +16,68 @@ public class Board {
     void reset() {
         for (int i = 0; i < Board.ROWS; i++) {
             for (int j = 0; j < Board.COLUMNS; j++) {
-                cells[i][j] = Color.NULL;
+                this.cells[i][j] = Color.NULL;
             }
         }
     }
 
     void putToken(int column, Color color) {
-        assert !isColumnFull(column);
+        assert !this.isColumnFull(column);
 
-        int i = 5;
-        while (isCellFull(i, column)) {
-            i--;
-        }
-        cells[i][column] = color;
+        this.cells[this.findEmptyRow(column)][column] = color;
     }
 
-    boolean isCellFull(int row, int column) {
-        return cells[row][column] != Color.NULL;
+    int findEmptyRow(int column) {
+        int row = Board.ROWS - 1;
+        while (this.isCellFull(new Coordinate(row, column))) {
+            row--;
+        }
+        return row;
+    }
+
+    boolean isCellFull(Coordinate coordinate) {
+        return this.cells[coordinate.getRow()][coordinate.getColumn()] != Color.NULL;
     }
 
     boolean isColumnFull(int column) {
-        return this.isCellFull(0, column);
+        return this.isCellFull(new Coordinate(0, column));
     }
 
-    boolean isConnect4(Color color) {
+    boolean isFinished() {
+        return this.isFull() || this.isConnect4();
+    }
+
+    boolean isFull() {
+        for (int i = 0; i < Board.COLUMNS; i++) {
+            if (!this.isColumnFull(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    boolean isConnect4() {
+        for (int i = 0; i < Board.ROWS; i++) {
+            for (int j = 0; j < Board.COLUMNS; j++) {
+                Coordinate coordinate = new Coordinate(i, j);
+                for(Direction direction: Direction.values()){
+                    if (this.hasFourConsecutive(coordinate.getCellsInDirection(direction))) {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
+    }
+
+    boolean hasFourConsecutive(ArrayList<Color> cellsDirection) {
+        Color color = cellsDirection.get(0);
+        for (int i = 1; i < cellsDirection.size(); i++) {
+            if (color != cellsDirection.get(i)){
+                return false;
+            }
+        }
+        return true;
     }
 
     void write() {
@@ -50,7 +89,7 @@ public class Board {
                 Message.VERTICAL_LINE.write();
             }
             System.out.println();
-            Message.HORIZONTAL_LINE.writeln();
         }
+        Message.HORIZONTAL_LINE.writeln();
     }
 }
