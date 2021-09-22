@@ -1,6 +1,6 @@
 package utils;
 
-class ClosedInterval {
+public class ClosedInterval {
     private int min;
     private int max;
 
