@@ -11,7 +11,7 @@ public class Connect4 {
     }
 
     private void play() {
-        Message.TITLE.write();
+        Message.TITLE.writeln();
         this.board.write();
         do {
             this.turn.play();
@@ -21,7 +21,7 @@ public class Connect4 {
     }
 
     private boolean isConnect4() {
-        return this.board.isTicTacToe(this.turn.getActiveColor());
+        return this.board.isConnect4(this.turn.getActiveColor());
     }
 
     public static void main(String[] args) {
