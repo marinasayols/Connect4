@@ -7,17 +7,23 @@ import utils.Console;
 
 public class BoardView {
 
-    public void start(Board board){
-        new MessageView().writeln(Message.TITLE);
-        this.write(board);
+    private final Board board;
+
+    public BoardView(Board board){
+        this.board = board;
     }
 
-    public void write(Board board) {
+    public void start(){
+        new MessageView().writeln(Message.TITLE);
+        this.write(this.board);
+    }
+
+    public void write() {
         new MessageView().writeln(Message.HORIZONTAL_LINE);
         for (int i = 0; i < Board.ROWS; i++) {
             new MessageView().write(Message.VERTICAL_LINE);
             for (int j = 0; j < Board.COLUMNS; j++) {
-                Console.getInstance().write(board.getColor(new Coordinate(i, j)));
+                Console.getInstance().write(this.board.getColor(new Coordinate(i, j)));
                 new MessageView().write(Message.VERTICAL_LINE);
             }
             Console.getInstance().writeln();
