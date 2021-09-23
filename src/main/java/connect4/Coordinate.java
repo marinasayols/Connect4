@@ -14,11 +14,12 @@ public class Coordinate {
     }
 
     ArrayList<Coordinate> getCellsInDirection(Direction direction) {
-        ArrayList<Coordinate> cellsDirection = new ArrayList<Coordinate>();
+        ArrayList<Coordinate> cellsDirection = new ArrayList<>();
         Coordinate current = this;
         do {
             cellsDirection.add(current);
-            current = new Coordinate(current.getRow() + direction.getX(), current.getColumn() + direction.getY());
+            current = new Coordinate(current.getRow() + direction.getX(),
+                    current.getColumn() + direction.getY());
         } while (current.isValid() && cellsDirection.size() < Board.COLOR_GOAL);
         return cellsDirection;
     }
