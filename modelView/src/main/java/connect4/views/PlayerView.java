@@ -1,14 +1,15 @@
 package connect4.models;
 
+import connect4.views.MessageView;
 import utils.ClosedInterval;
 import utils.Console;
 
-public class Player {
+public class PlayerView {
 
     private final Board board;
     private final Color color;
 
-    Player(Color color, Board board) {
+    PlayerView(Color color, Board board) {
         this.color = color;
         this.board = board;
     }
@@ -35,6 +36,6 @@ public class Player {
     }
 
     void writeWinner() {
-        Message.WINNER.writeln(this.color);
+        new MessageView().writeln(Message.WINNER, this.color.toString());
     }
 }
