@@ -1,9 +1,8 @@
 package connect4;
 
 public enum Error {
-    WIDTH_OVERFLOW("Column value must be between 0 and 6"),
+    WIDTH_OVERFLOW("Column value must be between 1 and 7"),
     FULL_COLUMN("This column is full"),
-    WRONG_FORMAT("Wrong format! Enter an integer, please!"),
     NULL;
 
     private String message;
