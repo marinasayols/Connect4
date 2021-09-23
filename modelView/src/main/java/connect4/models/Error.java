@@ -7,20 +7,18 @@ public enum Error {
 
     private String message;
 
-    Error(){
+    Error() {
     }
 
-    Error(String message){
+    Error(String message) {
         this.message = message;
     }
 
-    void writeln(){
-        if (!this.isNull()){
-            System.out.println(this.message);
-        }
+    public boolean isNull() {
+        return this == Error.NULL;
     }
 
-    boolean isNull(){
-        return this == Error.NULL;
+    public String getMessage() {
+        return this.message;
     }
 }

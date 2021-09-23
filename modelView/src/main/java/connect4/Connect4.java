@@ -2,29 +2,27 @@ package connect4;
 
 import connect4.models.Board;
 import connect4.models.Message;
-import connect4.models.Turn;
 import connect4.views.BoardView;
+import connect4.views.MessageView;
+import connect4.views.PlayerView;
 
 public class Connect4 {
 
     private final Board board;
-    private final BoardView boardView;
-    private final Turn turn;
 
     Connect4() {
         this.board = new Board();
-        this.turn = new Turn(this.board);
-        this.boardView = new BoardView(this.board);
     }
 
     private void play() {
-        Message.TITLE.writeln();
-        this.boardView.write(this.board);
+        BoardView boardView = new BoardView();
+        boardView.start(this.board);
+        PlayerView playerView = new PlayerView(this.board);
         do {
-            this.turn.play();
-            this.boardView.write(this.board);
+            playerView.play();
+            boardView.write(this.board);
         } while (!this.board.isFinished());
-        this.turn.writeWinner();
+        playerView.writeWinner();
     }
 
     public static void main(String[] args) {

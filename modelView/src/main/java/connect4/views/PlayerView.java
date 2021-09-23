@@ -1,41 +1,47 @@
-package connect4.models;
+package connect4.views;
 
-import connect4.views.MessageView;
+import connect4.models.Error;
+import connect4.models.*;
 import utils.ClosedInterval;
 import utils.Console;
 
 public class PlayerView {
-
     private final Board board;
-    private final Color color;
+    private Turn turn;
 
-    PlayerView(Color color, Board board) {
-        this.color = color;
+    public PlayerView(Board board) {
         this.board = board;
+        this.turn = new Turn(this.board);
     }
 
-    void putToken() {
+    public void play() {
+        this.putToken();
+        this.turn.next();
+    }
+
+    public void putToken() {
         int column = 0;
         Error error;
         do {
             column = Console.getInstance().readInt(Message.GET_COLUMN.toString()) - 1;
             error = this.getPutTokenError(column);
         } while (!error.isNull());
-        this.board.putToken(column, this.color);
+        this.board.putToken(column, this.turn.getActiveColor());
     }
 
-    Error getPutTokenError(int column) {
+    public Error getPutTokenError(int column) {
         Error error = Error.NULL;
         if (!new ClosedInterval(0, Board.COLUMNS - 1).isIncluded(column)) {
             error = Error.WIDTH_OVERFLOW;
         } else if (this.board.isColumnFull(column)) {
             error = Error.FULL_COLUMN;
         }
-        error.writeln();
+        new ErrorView().writeln(error);
         return error;
     }
 
-    void writeWinner() {
-        new MessageView().writeln(Message.WINNER, this.color.toString());
+    public void writeWinner() {
+        new MessageView().writeln(Message.WINNER,
+                this.turn.getActiveColor().toString());
     }
 }

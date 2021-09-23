@@ -22,13 +22,13 @@ public class Board {
         }
     }
 
-    void putToken(int column, Color color) {
+    public void putToken(int column, Color color) {
         assert !this.isColumnFull(column);
 
         this.cells[this.findEmptyRow(column)][column] = color;
     }
 
-    int findEmptyRow(int column) {
+    private int findEmptyRow(int column) {
         int row = Board.ROWS - 1;
         while (this.isCellFull(new Coordinate(row, column))) {
             row--;
@@ -40,7 +40,7 @@ public class Board {
         return this.cells[coordinate.getRow()][coordinate.getColumn()] != Color.NULL;
     }
 
-    boolean isColumnFull(int column) {
+    public boolean isColumnFull(int column) {
         return this.isCellFull(new Coordinate(0, column));
     }
 
@@ -74,14 +74,18 @@ public class Board {
     boolean hasFourConsecutive(ArrayList<Coordinate> cellsDirection) {
         Color color = this.cells[cellsDirection.get(0).getRow()][cellsDirection.get(0).getColumn()];
         int counter = 0;
-        for (int i = 0; i < cellsDirection.size(); i++) {
-            if (color == Color.NULL){
+        for (Coordinate coordinate : cellsDirection) {
+            if (color == Color.NULL) {
                 return false;
             }
-            if (color == this.cells[cellsDirection.get(i).getRow()][cellsDirection.get(i).getColumn()]) {
+            if (color == this.cells[coordinate.getRow()][coordinate.getColumn()]) {
                 counter++;
             }
         }
         return counter == Board.COLOR_GOAL;
+    }
+
+    public String getColor(Coordinate coordinate) {
+        return this.cells[coordinate.getRow()][coordinate.getColumn()].getName();
     }
 }
