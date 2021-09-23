@@ -20,17 +20,13 @@ public class Turn {
     }
 
     void play() {
-        this.players[this.activePlayer].putToken();
-        if (!this.board.isConnect4(this.getActiveColor())) {
+        this.players[this.activePlayer].play();
+        if (!this.board.isFinished()) {
             this.activePlayer = (this.activePlayer + 1) % Turn.NUMBER_PLAYERS;
         }
     }
 
     void writeWinner() {
         this.players[this.activePlayer].writeWinner();
-    }
-
-    Color getActiveColor() {
-        return this.players[this.activePlayer].getColor();
     }
 }
