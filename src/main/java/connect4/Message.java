@@ -1,11 +1,14 @@
 package connect4;
 
+import utils.Console;
+
 enum Message {
-    TITLE("--- CONNECT 4 ---"),
+    TITLE("~~~ ~~~ CONNECT 4 ~~~ ~~~"),
     WINNER("#player wins!!"),
     GET_COLUMN("Indicate column: "),
     HORIZONTAL_LINE("-------------------------------"),
-    VERTICAL_LINE(" | "),;
+    VERTICAL_LINE(" | "),
+    ;
 
     private String message;
 
@@ -14,19 +17,17 @@ enum Message {
     }
 
     void write() {
-        System.out.print(this.message);
+        Console.getInstance().write(this.message);
     }
 
     void writeln() {
-        System.out.println(this.message);
+        Console.getInstance().writeln(this.message);
     }
 
     void writeln(Color color) {
         assert this == Message.WINNER;
 
-        System.out.println(
-                this.message.replace(
-                        "#player", "" + color.toString()));
+        Console.getInstance().writeln(this.message.replace("#player", "" + color.toString()));
     }
 
     @Override
