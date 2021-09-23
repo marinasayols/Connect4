@@ -15,7 +15,7 @@ public class BoardView {
 
     public void start(){
         new MessageView().writeln(Message.TITLE);
-        this.write(this.board);
+        this.write();
     }
 
     public void write() {
