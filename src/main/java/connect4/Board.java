@@ -74,7 +74,10 @@ public class Board {
     boolean hasFourConsecutive(ArrayList<Coordinate> cellsDirection) {
         Color color = this.cells[cellsDirection.get(0).getRow()][cellsDirection.get(0).getColumn()];
         int counter = 0;
-        for (int i = 1; i < cellsDirection.size(); i++) {
+        for (int i = 0; i < cellsDirection.size(); i++) {
+            if (color == Color.NULL){
+                return false;
+            }
             if (color == this.cells[cellsDirection.get(i).getRow()][cellsDirection.get(i).getColumn()]) {
                 counter++;
             }
