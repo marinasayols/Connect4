@@ -1,9 +1,7 @@
 package connect4;
 
 import connect4.models.Board;
-import connect4.models.Message;
 import connect4.views.BoardView;
-import connect4.views.MessageView;
 import connect4.views.PlayerView;
 
 public class Connect4 {
