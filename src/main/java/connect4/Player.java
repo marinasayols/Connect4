@@ -1,13 +1,12 @@
 package connect4;
 
+import utils.ClosedInterval;
 import utils.Console;
-
-import java.util.Scanner;
 
 public class Player {
 
-    private Board board;
-    private Color color;
+    private final Board board;
+    private final Color color;
 
     Player(Color color, Board board) {
         this.color = color;
@@ -18,7 +17,7 @@ public class Player {
         int column = 0;
         Error error;
         do {
-            column = Console.getInstance().readInt(Message.GET_COLUMN.toString());
+            column = Console.getInstance().readInt(Message.GET_COLUMN.toString()) - 1;
             error = this.getPutTokenError(column);
         } while (!error.isNull());
         this.board.putToken(column, this.color);
@@ -26,7 +25,7 @@ public class Player {
 
     Error getPutTokenError(int column) {
         Error error = Error.NULL;
-        if (column > Board.COLUMNS) {
+        if (!new ClosedInterval(0, Board.COLUMNS - 1).isIncluded(column)) {
             error = Error.WIDTH_OVERFLOW;
         } else if (this.board.isColumnFull(column)) {
             error = Error.FULL_COLUMN;
@@ -37,9 +36,5 @@ public class Player {
 
     void writeWinner() {
         Message.WINNER.writeln(this.color);
-    }
-
-    Color getColor() {
-        return this.color;
     }
 }
