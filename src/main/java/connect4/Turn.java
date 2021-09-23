@@ -20,7 +20,7 @@ public class Turn {
     }
 
     void play() {
-        this.players[this.activePlayer].play();
+        this.players[this.activePlayer].putToken();
         if (!this.board.isFinished()) {
             this.activePlayer = (this.activePlayer + 1) % Turn.NUMBER_PLAYERS;
         }
