@@ -9,11 +9,11 @@ public class BoardView {
 
     private final Board board;
 
-    public BoardView(Board board){
+    public BoardView(Board board) {
         this.board = board;
     }
 
-    public void start(){
+    public void start() {
         new MessageView().writeln(Message.TITLE);
         this.write();
     }
