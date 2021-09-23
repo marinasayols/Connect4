@@ -15,12 +15,12 @@ public class Connect4 {
     }
 
     private void play() {
-        BoardView boardView = new BoardView();
-        boardView.start(this.board);
+        BoardView boardView = new BoardView(this.board);
+        boardView.start();
         PlayerView playerView = new PlayerView(this.board);
         do {
             playerView.play();
-            boardView.write(this.board);
+            boardView.write();
         } while (!this.board.isFinished());
         playerView.writeWinner();
     }
